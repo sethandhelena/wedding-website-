@@ -54,20 +54,13 @@
         </div>
       </fieldset>
       <div class="form-row">
-        <label><span data-content="form_guests_label">Number of Guests</span><div class="guest-select" data-guest-select>
-              <button type="button" class="guest-select-button" aria-haspopup="listbox" aria-expanded="false">
-                <span data-guest-value>1</span>
-                <span class="guest-select-arrow" aria-hidden="true">▾</span>
-              </button>
-              <div class="guest-select-menu" role="listbox" hidden>
-                <button type="button" role="option" data-guest-option="1" aria-selected="true">1</button>
-                <button type="button" role="option" data-guest-option="2">2</button>
-                <button type="button" role="option" data-guest-option="3">3</button>
-                <button type="button" role="option" data-guest-option="4">4</button>
-                <button type="button" role="option" data-guest-option="5">5</button>
-              </div>
-              <input type="hidden" name="guests" value="1">
-            </div></label>
+        <label><span data-content="form_guests_label">Number of Guests</span><select name="guests" required>
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select></label>
 
         <label>Meal Preference<select name="meal"><option>Chicken</option><option>Beef</option><option>Vegetarian</option></select></label>
       </div>

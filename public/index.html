@@ -126,20 +126,13 @@
             <label class="radio"><input type="radio" name="attendance" value="Joyfully accepts" required /> Joyfully accepts</label>
             <label class="radio"><input type="radio" name="attendance" value="Regretfully declines" required /> Regretfully declines</label>
           </fieldset>
-          <label>Number of Guests<div class="guest-select" data-guest-select>
-              <button type="button" class="guest-select-button" aria-haspopup="listbox" aria-expanded="false">
-                <span data-guest-value>1</span>
-                <span class="guest-select-arrow" aria-hidden="true">▾</span>
-              </button>
-              <div class="guest-select-menu" role="listbox" hidden>
-                <button type="button" role="option" data-guest-option="1" aria-selected="true">1</button>
-                <button type="button" role="option" data-guest-option="2">2</button>
-                <button type="button" role="option" data-guest-option="3">3</button>
-                <button type="button" role="option" data-guest-option="4">4</button>
-                <button type="button" role="option" data-guest-option="5">5</button>
-              </div>
-              <input type="hidden" name="guests" value="1">
-            </div></label>
+          <label>Number of Guests<select name="guests" required>
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select></label>
           <label>Meal Preference<select name="meal"><option>Chicken</option><option>Beef</option><option>Vegetarian</option></select></label>
           <label>Song Request or Note<textarea name="message" rows="4"></textarea></label>
           <button class="btn btn-gold" type="submit">Send RSVP</button>
