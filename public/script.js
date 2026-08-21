@@ -107,68 +107,6 @@ function renderRegistryItems(grid,items,showAll){
 
 
 
-
-function initGuestSelect(){
-  document.querySelectorAll('[data-guest-select]').forEach(wrap=>{
-    const button=wrap.querySelector('.guest-select-button');
-    const menu=wrap.querySelector('.guest-select-menu');
-    const valueEl=wrap.querySelector('[data-guest-value]');
-    const hidden=wrap.querySelector('input[name="guests"]');
-    const options=[...wrap.querySelectorAll('[data-guest-option]')];
-
-    function close(){
-      menu.hidden=true;
-      button.setAttribute('aria-expanded','false');
-    }
-
-    button.addEventListener('click',event=>{
-      event.preventDefault();
-      event.stopPropagation();
-
-      const willOpen=menu.hidden;
-
-      document.querySelectorAll('[data-guest-select] .guest-select-menu').forEach(other=>{
-        if(other!==menu) other.hidden=true;
-      });
-      document.querySelectorAll('[data-guest-select] .guest-select-button').forEach(other=>{
-        if(other!==button) other.setAttribute('aria-expanded','false');
-      });
-
-      menu.hidden=!willOpen;
-      button.setAttribute('aria-expanded',willOpen?'true':'false');
-    });
-
-    options.forEach(option=>{
-      option.addEventListener('click',event=>{
-        event.preventDefault();
-        event.stopPropagation();
-
-        const value=option.dataset.guestOption;
-        hidden.value=value;
-        valueEl.textContent=value;
-
-        options.forEach(o=>{
-          o.setAttribute('aria-selected',o===option?'true':'false');
-        });
-
-        close();
-      });
-    });
-  });
-
-  document.addEventListener('click',()=>{
-    document.querySelectorAll('[data-guest-select] .guest-select-menu').forEach(menu=>menu.hidden=true);
-    document.querySelectorAll('[data-guest-select] .guest-select-button').forEach(button=>button.setAttribute('aria-expanded','false'));
-  });
-
-  document.addEventListener('keydown',event=>{
-    if(event.key==='Escape'){
-      document.querySelectorAll('[data-guest-select] .guest-select-menu').forEach(menu=>menu.hidden=true);
-      document.querySelectorAll('[data-guest-select] .guest-select-button').forEach(button=>button.setAttribute('aria-expanded','false'));
-    }
-  });
-}
-
 function initActiveNavigation(){
   const path=location.pathname.toLowerCase();
   const current=(path.split('/').pop()||'index.html').split('?')[0].split('#')[0];
@@ -265,8 +203,13 @@ async function initJournal(){
     const data=await res.json();
     if(!res.ok)throw new Error();
     posts=data.posts||[];
-    if(posts.length){
-      grid.innerHTML=posts.map((p,i)=>journalCardMarkup(p,i>=6)).join('');
+    // The newest published post is already featured above.
+    // Start the Latest Posts grid with the second-newest post to avoid duplication.
+    const latestPosts=posts.slice(1);
+    if(latestPosts.length){
+      grid.innerHTML=latestPosts.map((p,i)=>journalCardMarkup(p,i>=6)).join('');
+    }else{
+      grid.innerHTML='';
     }
   }catch{}
   const button=document.getElementById('journalLoadMore');
