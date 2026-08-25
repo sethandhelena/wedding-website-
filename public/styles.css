@@ -2188,3 +2188,17 @@ img.admin-uploaded-image,
     transform: none !important;
   }
 }
+
+
+/* Homepage Our Story refinements */
+.home-story-button{
+  display:inline-flex !important;
+  width:auto !important;
+  min-width:0 !important;
+  padding:12px 22px !important;
+}
+
+.home-story-signature{
+  margin-top:20px;
+  margin-bottom:18px;
+}
