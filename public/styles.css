@@ -2202,3 +2202,17 @@ img.admin-uploaded-image,
   margin-top:20px;
   margin-bottom:18px;
 }
+
+
+/* Homepage Our Story: compact CTA button */
+.story-copy .home-story-button{
+  display:inline-flex !important;
+  width:fit-content !important;
+  max-width:max-content !important;
+  min-width:0 !important;
+  flex:0 0 auto !important;
+  align-self:flex-start !important;
+  justify-self:start !important;
+  padding:12px 22px !important;
+  margin-top:4px !important;
+}

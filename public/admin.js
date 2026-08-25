@@ -7,7 +7,8 @@ const PAGE_SCHEMAS={
   home:{label:'Home',file:'index.html',sections:[
     ['Hero',[['hero_eyebrow','Eyebrow'],['hero_title','Main heading'],['hero_intro','Date / location line'],['hero_button','View Wedding Details button'],['hero_link','Button link'],['hero_image_url','Hero image','image']]],
     ['Countdown',[['countdown_eyebrow','Eyebrow'],['countdown_title','Heading']]],
-    ['Our Story',[['story_image_url','Our Story image','image'],['story_eyebrow','Eyebrow'],['story_title','Heading'],['story_text','Text','textarea'],
+    ['Our Story',[['story_image_url','Our Story image','image'],['story_eyebrow','Eyebrow'],['story_title','Heading'],['story_text','Paragraph 1','textarea'],
+      ['story_text_2','Paragraph 2','textarea'],
       ['story_signature','Signature'],['story_button','Read Our Story button'],['story_link','Button link']]],
     ['Wedding Details',[['wedding_image_url','Wedding image','image'],['wedding_eyebrow','Eyebrow'],['wedding_title','Heading'],['wedding_text','Text','textarea'],['wedding_button','Wedding Details button'],['wedding_link','Button link']]],
     ['RSVP',[['rsvp_eyebrow','Eyebrow'],['rsvp_title','Heading'],['rsvp_text','Text','textarea'],['rsvp_button','RSVP button'],['rsvp_link','Button link']]],
@@ -98,6 +99,10 @@ function renderPageEditor(slug){
   const values={...(pageContent[slug]||{})};
   if(slug==='journal' && !('featured_note' in values)){
     values.featured_note='Automatically uses the latest published Journal post. Edit that post under the Journal tab.';
+  }
+
+  if(slug==='home' && !('story_text_2' in values)){
+    values.story_text_2='Now we can’t wait to begin our next chapter surrounded by the people who have supported and loved us along the way.';
   }
 
   if(slug==='rsvp'){
