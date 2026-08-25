@@ -2102,3 +2102,34 @@ img.admin-uploaded-image,
     background-size:cover !important;
   }
 }
+
+
+/* Mobile navigation: one short underline under the active page only */
+@media (max-width: 900px) {
+  .site-header .nav a.active-page,
+  .site-header .nav a[aria-current="page"] {
+    position: relative !important;
+    display: inline-block !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+
+    /* Remove old underline/border styles that created the long line */
+    text-decoration: none !important;
+    border-bottom: 0 !important;
+    padding-bottom: 8px !important;
+  }
+
+  .site-header .nav a.active-page::after,
+  .site-header .nav a[aria-current="page"]::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 2px !important;
+    background: currentColor !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
