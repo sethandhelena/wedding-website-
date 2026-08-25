@@ -10,7 +10,28 @@ const PAGE_SCHEMAS={
     ['Our Story',[['story_image_url','Our Story image','image'],['story_eyebrow','Eyebrow'],['story_title','Heading'],['story_text','Paragraph 1','textarea'],
       ['story_text_2','Paragraph 2','textarea'],
       ['story_signature','Signature'],['story_button','Read Our Story button'],['story_link','Button link']]],
-    ['Wedding Details',[['wedding_image_url','Wedding image','image'],['wedding_eyebrow','Eyebrow'],['wedding_title','Heading'],['wedding_text','Text','textarea'],['wedding_button','Wedding Details button'],['wedding_link','Button link']]],
+    ['Wedding Day',[
+      ['wedding_eyebrow','Eyebrow'],
+      ['wedding_title','Heading'],
+      ['wedding_text','Intro text','textarea'],
+
+      ['ceremony_icon_url','Ceremony icon','image'],
+      ['ceremony_title','Ceremony title'],
+      ['ceremony_time','Ceremony time'],
+      ['ceremony_location','Ceremony location','textarea'],
+      ['ceremony_map_text','Map link text'],
+      ['ceremony_map_link','Map link'],
+
+      ['reception_icon_url','Reception icon','image'],
+      ['reception_title','Reception title'],
+      ['reception_time','Reception time'],
+      ['reception_text','Reception text','textarea'],
+
+      ['attire_icon_url','Attire icon','image'],
+      ['attire_title','Attire title'],
+      ['attire_type','Attire type'],
+      ['attire_text','Attire text','textarea']
+    ]],
     ['RSVP',[['rsvp_eyebrow','Eyebrow'],['rsvp_title','Heading'],['rsvp_text','Text','textarea'],['rsvp_button','RSVP button'],['rsvp_link','Button link']]],
     ['Registry',[['registry_image_url','Registry image','image'],['registry_eyebrow','Eyebrow'],['registry_title','Heading'],['registry_text','Text','textarea'],['registry_button','View Registry button'],['registry_link','Button link']]],
     ['Wedding Journal',[['journal_eyebrow','Eyebrow'],['journal_title','Heading'],['journal_button','View More Journals button'],['journal_link','Button link']]],
@@ -103,6 +124,31 @@ function renderPageEditor(slug){
 
   if(slug==='home' && !('story_text_2' in values)){
     values.story_text_2='Now we can’t wait to begin our next chapter surrounded by the people who have supported and loved us along the way.';
+  }
+
+  if(slug==='home'){
+    const weddingDayDefaults={
+      wedding_eyebrow:'Wedding Day',
+      wedding_title:'Celebrate With Us',
+      wedding_text:'We’re so excited to have our favorite people together for an unforgettable day.',
+      ceremony_icon_url:'',
+      ceremony_title:'Ceremony',
+      ceremony_time:'3:00 PM',
+      ceremony_location:'Stonewall Farms\n3067 67th Ave NW\nWillmar, MN',
+      ceremony_map_text:'View Map',
+      ceremony_map_link:'#stonewall-map',
+      reception_icon_url:'',
+      reception_title:'Reception',
+      reception_time:'5:30 PM',
+      reception_text:'Reception to follow immediately after the ceremony.',
+      attire_icon_url:'',
+      attire_title:'Attire',
+      attire_type:'Semi-Formal',
+      attire_text:'Garden-inspired colors and comfortable dancing shoes encouraged.'
+    };
+    for(const [k,v] of Object.entries(weddingDayDefaults)){
+      if(!(k in values)) values[k]=v;
+    }
   }
 
   if(slug==='rsvp'){
