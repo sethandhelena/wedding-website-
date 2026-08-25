@@ -34,7 +34,13 @@ const PAGE_SCHEMAS={
     ]],
     ['RSVP',[['rsvp_eyebrow','Eyebrow'],['rsvp_title','Heading'],['rsvp_text','Text','textarea'],['rsvp_button','RSVP button'],['rsvp_link','Button link']]],
     ['Registry',[['registry_image_url','Registry image','image'],['registry_eyebrow','Eyebrow'],['registry_title','Heading'],['registry_text','Text','textarea'],['registry_button','View Registry button'],['registry_link','Button link']]],
-    ['Wedding Journal',[['journal_eyebrow','Eyebrow'],['journal_title','Heading'],['journal_button','View More Journals button'],['journal_link','Button link']]]
+    ['Wedding Journal',[['journal_eyebrow','Eyebrow'],['journal_title','Heading'],['journal_button','View More Journals button'],['journal_link','Button link']]],
+    ['Final Celebration',[
+      ['closing_image_url','Background image','image'],
+      ['closing_date','Date'],
+      ['closing_title','Heading'],
+      ['closing_signature','Signature']
+    ]]
   ]},
   story:{label:'Our Story',file:'story.html',sections:[
     ['Hero',[['hero_eyebrow','Eyebrow'],['hero_title','Page title'],['hero_intro','Intro','textarea'],['hero_image_url','Hero image URL','image']]],
@@ -146,6 +152,18 @@ function renderPageEditor(slug){
       attire_text:'Garden-inspired colors and comfortable dancing shoes encouraged.'
     };
     for(const [k,v] of Object.entries(weddingDayDefaults)){
+      if(!(k in values)) values[k]=v;
+    }
+  }
+
+  if(slug==='home'){
+    const closingDefaults={
+      closing_image_url:'',
+      closing_date:'NOVEMBER 7, 2026',
+      closing_title:'We Can’t Wait to Celebrate With You',
+      closing_signature:'With love, Seth & Helena'
+    };
+    for(const [k,v] of Object.entries(closingDefaults)){
       if(!(k in values)) values[k]=v;
     }
   }
