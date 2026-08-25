@@ -34,8 +34,7 @@ const PAGE_SCHEMAS={
     ]],
     ['RSVP',[['rsvp_eyebrow','Eyebrow'],['rsvp_title','Heading'],['rsvp_text','Text','textarea'],['rsvp_button','RSVP button'],['rsvp_link','Button link']]],
     ['Registry',[['registry_image_url','Registry image','image'],['registry_eyebrow','Eyebrow'],['registry_title','Heading'],['registry_text','Text','textarea'],['registry_button','View Registry button'],['registry_link','Button link']]],
-    ['Wedding Journal',[['journal_eyebrow','Eyebrow'],['journal_title','Heading'],['journal_button','View More Journals button'],['journal_link','Button link']]],
-    ['Invitation Help',[['help_eyebrow','Eyebrow'],['help_title','Heading'],['help_text','Text','textarea'],['help_button','View Wedding Details button'],['help_link','Button link']]]
+    ['Wedding Journal',[['journal_eyebrow','Eyebrow'],['journal_title','Heading'],['journal_button','View More Journals button'],['journal_link','Button link']]]
   ]},
   story:{label:'Our Story',file:'story.html',sections:[
     ['Hero',[['hero_eyebrow','Eyebrow'],['hero_title','Page title'],['hero_intro','Intro','textarea'],['hero_image_url','Hero image URL','image']]],
