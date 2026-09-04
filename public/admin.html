@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wedding Admin | Seth & Helena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" type="image/png" href="/favicon-v2.png?v=2">
+  <link rel="shortcut icon" href="/favicon-v2.ico?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon-v2.png?v=2">
+</head>
+<body>
+  <main class="admin-shell">
+    <section id="loginView" class="login-card">
+      <img src="assets/seth-helena-monogram.png" alt="Seth and Helena monogram" class="admin-monogram">
+      <p class="eyebrow">Private Administration</p>
+      <h1>Wedding Website Admin</h1>
+      <p>Sign in to manage page content, RSVPs, registry items, and journal posts.</p>
+      <form id="loginForm">
+        <label>Admin password<input id="adminPassword" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Sign In</button>
+        <p id="loginMessage" class="status"></p>
+      </form>
+    </section>
+
+    <section id="dashboardView" hidden>
+      <header class="admin-header">
+        <div>
+          <p class="eyebrow">Seth & Helena</p>
+          <h1>Wedding Admin</h1>
+        </div>
+        <div class="header-actions">
+          <a href="index.html" target="_blank" rel="noopener">View Website</a>
+          <button id="logoutButton" type="button" class="secondary">Log Out</button>
+        </div>
+      </header>
+
+      <div class="stats" id="stats"></div>
+
+      <nav class="tabs" aria-label="Admin sections">
+        <button class="tab active" data-tab="pages">Pages</button>
+        <button class="tab" data-tab="rsvps">RSVPs</button>
+        <button class="tab" data-tab="registry">Registry</button>
+        <button class="tab" data-tab="journal">Journal</button>
+      </nav>
+
+
+      <section class="panel active" id="panel-pages">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Website Content</p><h2>Pages</h2></div>
+          <a class="button-link" href="index.html" target="_blank" rel="noopener">View Website</a>
+        </div>
+        <div class="page-admin-layout">
+          <aside class="page-picker" id="pagePicker"></aside>
+          <form id="pageContentForm" class="editor page-content-editor">
+            <div class="page-editor-heading">
+              <div>
+                <p class="eyebrow">Edit Page</p>
+                <h3 id="pageEditorTitle">Our Story</h3>
+              </div>
+              <a id="pagePreviewLink" href="story.html" target="_blank" rel="noopener">Preview Page →</a>
+            </div>
+            <div id="pageFields" class="page-fields"></div>
+            <div class="editor-actions">
+              <button type="submit">Save Page</button>
+            </div>
+            <p id="pageMessage" class="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-rsvps">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Guest Responses</p><h2>RSVPs</h2></div>
+          <a class="button-link" href="/api/admin/rsvps.csv">Export CSV</a>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Household / Guests</th><th>Attendance</th><th>Guest Count</th><th>Household Email</th><th>Submitted</th><th>Actions</th></tr></thead><tbody id="rsvpRows"></tbody></table></div>
+      </section>
+
+      <section class="panel" id="panel-registry">
+        <div class="panel-heading"><div><p class="eyebrow">Editable Gifts</p><h2>Registry</h2></div><button id="newRegistryButton" type="button">Add Registry Item</button></div>
+        <form id="registryForm" class="editor" hidden>
+          <input type="hidden" name="id">
+          <div class="registry-import-box">
+            <label>Retailer item URL
+              <div class="registry-import-row">
+                <input id="registryImportUrl" type="url" placeholder="Paste a Target, Crate & Barrel, or Honeyfund URL">
+                <button id="fetchRegistryDetails" type="button" class="secondary">Fetch Item Details</button>
+              </div>
+            </label>
+            <p class="import-help">We’ll try to fill the title, description, price, image, store, and gift link automatically. Review the details before saving.</p>
+            <p id="registryImportMessage" class="status"></p>
+          </div>
+          <div class="grid-two">
+            <label>Store<select name="store"><option value="target">Target</option><option value="crate">Crate & Barrel</option><option value="honeymoon">Honeymoon</option></select></label>
+            <label>Status<select name="status"><option value="available">Available</option><option value="purchased">Purchased</option></select></label>
+            <label>Title<input name="title" required></label>
+            <label>Price<input name="price" placeholder="$129.95 or Any Amount"></label>
+            <label>Image class<input name="image_class" placeholder="gift-image-one"></label>
+            <label>Image URL<input name="image_url" type="url" placeholder="https://..."></label>
+            <label>Gift URL<input name="gift_url" type="url" placeholder="https://..."></label>
+            <label>Sort order<input name="sort_order" type="number" value="0"></label>
+          </div>
+          <label>Description<textarea name="description" rows="4"></textarea></label>
+          <label class="check"><input name="featured" type="checkbox"> Most Wanted / featured</label>
+          <div class="editor-actions"><button type="submit">Save Item</button><button id="cancelRegistry" class="secondary" type="button">Cancel</button></div>
+          <p id="registryMessage" class="status"></p>
+        </form>
+        <div id="registryList" class="item-list"></div>
+      </section>
+
+      <section class="panel" id="panel-journal">
+        <div class="panel-heading"><div><p class="eyebrow">Editable Content</p><h2>Journal</h2></div><button id="newJournalButton" type="button">Add Journal Post</button></div>
+        <form id="journalForm" class="editor" hidden>
+          <input type="hidden" name="id">
+          <div class="grid-two">
+            <label>Title<input name="title" required></label>
+            <label>Category<input name="category"></label>
+            <label>Display date<input name="post_date" placeholder="October 4, 2026"></label>
+            <label>Sort order<input name="sort_order" type="number" value="0"></label>
+            <label>Image class<input name="image_class" placeholder="journal-one"></label>
+            <label class="admin-image-field">Journal image
+              <input name="image_url" type="hidden">
+              <input id="journalImageFile" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg">
+              <span class="image-upload-help">PNG or JPG · max 10 MB</span>
+              <span id="journalImageUploadStatus" class="image-upload-status"></span>
+              <div class="admin-image-actions">
+                <button id="journalImageDelete" type="button" class="secondary danger-light">Delete Image</button>
+              </div>
+              <img id="journalImagePreview" class="admin-image-preview" alt="" hidden>
+            </label>
+          </div>
+          <label>Excerpt<textarea name="excerpt" rows="3"></textarea></label>
+          <label>Content<textarea name="content" rows="7"></textarea></label>
+          <label class="check"><input name="published" type="checkbox" checked> Published</label>
+          <div class="editor-actions"><button type="submit">Save Post</button><button id="cancelJournal" class="secondary" type="button">Cancel</button></div>
+          <p id="journalMessage" class="status"></p>
+        </form>
+        <div id="journalList" class="item-list"></div>
+      </section>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
